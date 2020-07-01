@@ -1,62 +1,71 @@
-#include<'main.h'>
+#include<bits/stdc++.h>
 using namespace std;
 unordered_map<int,string>display_content;
-int A,B,C,D,E,H,L;
-int 
+int A=0,B=0,C=0,D=0,E=0,H=0,L=0;
+bool S=0,Z=0,AC=0,P=0,CY=0;
+#include"Mnemonics.cpp"
+#include"utility.cpp"
+#include"Arithmetic.cpp"
+#include"Branching.cpp"
+#include"Load_and_Store.cpp"
+#include"Logical.cpp"
+
 int main()
 {
-	while(true)
+	bool check=1;
+	int bit_operation;
+	while(check==1)
 	{
-		bool check=1;
-		int bit_operation;
-		while(check==1)
-		{
-			check=0;
-			cout<<"Enter 16 for 16bit operation or 8 for 8bit operation\n";
-			cin>>bit_operation;
-			if(bit_operation!=16 || bit_operation!=8)
-			{
-				cout<<"Bit operation not found! Enter a valid bit operation\n";	
-				check = 1;
-			}
-		}
+		check=0;
+		cout<<"Enter 16 for 16bit operation or 8 for 8bit operation\n";
+		cin>>bit_operation;
+		if(bit_operation==16)break;
+		if(bit_operation==8)break;
+		cout<<"Bit operation not found! Enter a valid bit operation\n";	
+		check = 1;
+	}
 
-		check=1;
-		string address="";
-		while(check==1)
+	check=1;
+	string address="";
+	while(check==1)
+	{
+		check=0;
+		cout<<"Enter the starting address between 0000H-FFFFH\n";
+		cin>>address;
+		if(address.size()!=5)
 		{
-			check=0;
-			cout<<"Enter the starting address between 0000H-FFFFH\n";
-			cin>>address;
-			if(address.size()!=5)
-				{
-					cout<<"Enter a 4 digit address Ex:- 1010H\n";
-					check=1;
-			else
+			cout<<"Enter a 4 digit address Ex:- 1010H\n";
+			check=1;
+		}
+		else
+		{
+			for(int i=0;i<4;++i)
 			{
-				for(i=0;i<4;++i)
+				if(char_to_int.find(address[i])==char_to_int.end())
 				{
-					if(char_to_int.find(s[i])==char_to_int.end())
-					{
-						cout<<"Enter a valid address\n";
-						check=1;break;
-					}
+					cout<<"Enter a valid address\n";
+					check=1;break;
 				}
 			}
 		}
+	}
 
+	while(true)
+	{
 		check=1;
-		string user_instruction="",mne="";
+		string user_instruction,mne;
 		int n,i;
 		while(check==1)
 		{
 			check = 0;
+			mne="";
 			cout<<"Enter a Instruction\n";
-			cin>>user_instruction;
-			n=user_instruction.size(),i=0;
-			while(i<n && s[i]!=" ")
+			getline(cin>>ws,user_instruction);
+			i=0;
+			while(user_instruction[i]!=' ')
 			{
-				mne.push_back(user_instruction[i++]);
+				mne.push_back(user_instruction[i]);
+				++i;
 			}
 			if(mnemonics.find(mne)==mnemonics.end())
 			{
@@ -74,7 +83,7 @@ int main()
 			case 2:
 					ADI(user_instruction);
 					break;
-			case 3:
+			/*case 3:
 					DAD(user_instruction);
 					break;
 			case 4:
@@ -152,7 +161,7 @@ int main()
 			case 28:
 					HELP(user_instruction);
 					break;
-			default:
+			*/default:
 					cout<<"You found a bug\n";	
 		}
 
