@@ -1,5 +1,5 @@
-#include<bits/stdc++.h>
-usinSETamespace std;
+#include<'main.h'>
+using namespace std;
 unordered_map<string,pair<int,char>>mnemonics{
 	{"ADD",{1,'1'}},
 	{"ADI",{2,'2'}},
@@ -27,4 +27,24 @@ unordered_map<string,pair<int,char>>mnemonics{
 	{"XCHG",{24,'1'}},
 	{"CMA",{25,'1'}},
 	{"CMP",{26,'1'}},
+	{"EOF",{27,'0'}},
+	{"HELP",{28,'0'}},
+};	
+
+unordered_map<char,int>char_to_int{
+	{'1',1},
+	{'2',2},
+	{'3',3},
+	{'4',4},
+	{'5',5},
+	{'6',6},
+	{'7',7},
+	{'8',8},
+	{'9',9},
+	{'A',10},
+	{'B',11},
+	{'C',12},
+	{'D',13},
+	{'E',14},
+	{'F',15},
 };
