@@ -1,8 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 unordered_map<int,string>display_content;
+unordered_map<string,string>address_data; //can be value or instruction
 int A=0,B=0,C=0,D=0,E=0,H=0,L=0;
-bool S=0,Z=0,AC=0,P=0,CY=0;
+bool SF=0,ZF=0,AC=0,PF=0,CF=0;
 #include"Mnemonics.cpp"
 #include"utility.cpp"
 #include"Arithmetic.cpp"
@@ -62,7 +63,7 @@ int main()
 			cout<<"Enter a Instruction\n";
 			getline(cin>>ws,user_instruction);
 			i=0;
-			while(user_instruction[i]!=' ')
+			while(i<user_instruction.size() &&  user_instruction[i]!=' ')
 			{
 				mne.push_back(user_instruction[i]);
 				++i;
@@ -72,7 +73,7 @@ int main()
 				cout<<"Instruction not found\nRe-enter correct Instruction or type HELP for debugger\n";
 				check=1;
 			}
-		}
+		}	
 		int instruction_id = mnemonics[mne].first;
 
 		switch(instruction_id)
@@ -82,29 +83,31 @@ int main()
 					break;
 			case 2:
 					ADI(user_instruction);
+					cout<<A<<"\n";
 					break;
 			/*case 3:
 					DAD(user_instruction);
 					break;
-			case 4:
+			*/case 4:
 					DCR(user_instruction);
 					break;
-			case 5:
+			/*case 5:
 					DCX(user_instruction);
 					break;
+			*/
 			case 6:
 					INR(user_instruction);
 					break;
-			case 7:
+			/*case 7:
 					INX(user_instruction);
 					break;
-			case 8:
+			*/case 8:
 					SUB(user_instruction);
 					break;
 			case 9:
 					SUI(user_instruction);
 					break;
-			case 10:
+			/*case 10:
 					SET(user_instruction);
 					break;
 			case 11:
@@ -149,13 +152,13 @@ int main()
 			case 24:
 					XCHG(user_instruction);
 					break;
-			case 25:
-					CMA(user_instruction);
+			*/case 25:
+					CMA();
 					break;
 			case 26:
 					CMP(user_instruction);
 					break;
-			case 27:
+			/*case 27:
 					EOF(user_instruction);
 					break;
 			case 28:
