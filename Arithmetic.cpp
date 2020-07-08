@@ -227,3 +227,121 @@ void INR(string &user_instruction)
 	}
 	CF = tmp_CF;
 }
+
+void INX(string &user_instruction)
+{
+	SF=0,ZF=0,AC=0,PF=0,CF=0;
+	int tmp;
+	switch(user_instruction[4])
+	{
+		case 'B':
+				temp = hex_to_dec(dec_to_hex(B)+dec_to_hex(C));
+				break;
+		case 'D':
+				temp = hex_to_dec(dec_to_hex(D)+dec_to_hex(E));
+				break;
+		case 'H':
+				temp = hex_to_dec(dec_to_hex(H)+dec_to_hex(L));
+				break;
+		default: 
+				cout<<"You found a bug!";
+	}
+	++temp;
+	if(temp>hex_to_dec("FFFF"))temp-=hex_to_dec("FFFF")+1;
+	string val = dec_to_hex(temp);
+	string address1 = "",address2 = "";
+	for(int i=0;i<=1;++i)address1.push_back(val[i]);
+	for(int i=2;i<=3;++i)address2.push_back(val[i]);
+	switch(user_instruction[4])
+	{
+		case 'B':
+				C = address_data[hex_to_dec(address2)];
+				B = address_data[hex_to_dec(address1)];	
+				break;
+		case 'D':
+				E = address_data[hex_to_dec(address2)];
+				D = address_data[hex_to_dec(address1)];
+				break;
+		case 'H':
+				L = address_data[hex_to_dec(address2)];
+				H = address_data[hex_to_dec(address1)];
+				break;
+		default: 
+				cout<<"You found a bug!";
+	}
+}
+
+void DCX(string &user_instruction)
+{
+	SF=0,ZF=0,AC=0,PF=0,CF=0;
+	int tmp;
+	switch(user_instruction[4])
+	{
+		case 'B':
+				temp = hex_to_dec(dec_to_hex(B)+dec_to_hex(C));
+				break;
+		case 'D':
+				temp = hex_to_dec(dec_to_hex(D)+dec_to_hex(E));
+				break;
+		case 'H':
+				temp = hex_to_dec(dec_to_hex(H)+dec_to_hex(L));
+				break;
+		default: 
+				cout<<"You found a bug!";
+	}
+	--temp;
+	if(temp<0)temp+=hex_to_dec("FFFF")+1;
+	string val = dec_to_hex(temp);
+	string address1 = "",address2 = "";
+	for(int i=0;i<=1;++i)address1.push_back(val[i]);
+	for(int i=2;i<=3;++i)address2.push_back(val[i]);
+	switch(user_instruction[4])
+	{
+		case 'B':
+				C = address_data[hex_to_dec(address2)];
+				B = address_data[hex_to_dec(address1)];	
+				break;
+		case 'D':
+				E = address_data[hex_to_dec(address2)];
+				D = address_data[hex_to_dec(address1)];
+				break;
+		case 'H':
+				L = address_data[hex_to_dec(address2)];
+				H = address_data[hex_to_dec(address1)];
+				break;
+		default: 
+				cout<<"You found a bug!";
+	}
+}
+
+void DAD(string &user_instruction)
+{
+	SF=0,ZF=0,AC=0,PF=0,CF=0;
+	int val1 = hex_to_dec(dec_to_hex(H)+dec_to_hex(L)),val2;
+	switch(user_instruction[4])
+	{
+		case 'B':
+				val2 = hex_to_dec(dec_to_hex(B)+dec_to_hex(C));
+				break;
+		case 'D':
+				val2 = hex_to_dec(dec_to_hex(D)+dec_to_hex(E));
+				break;
+		case 'H':
+				val2 = val1;
+				break;
+		default: 
+				cout<<"You found a bug!";
+	}
+	val1+=val2;
+	if(val1>hex_to_dec("FFFF"))
+	{
+		CF=1;
+		val1-=hex_to_dec("FFFF")+1;
+	}
+	string val = dec_to_hex(val1);
+	string address1 = "",address2 = "";
+	for(int i=0;i<=1;++i)address1.push_back(val[i]);
+	for(int i=2;i<=3;++i)address2.push_back(val[i]);
+	L = address_data[hex_to_dec(address2)];
+	H = address_data[hex_to_dec(address1)];
+}
