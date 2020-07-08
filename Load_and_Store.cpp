@@ -100,14 +100,14 @@ void LDA(string &user_instruction)
 {
 	string address = "";
 	for(int i=4;i<=7;++i)address.push_back(user_instruction[i]);
-	A = hex_to_dec(address_data[address]);
+	A = address_data[hex_to_dec(address)];
 }
 
 void STA(string &user_instruction)
 {
 	string address = "";
 	for(int i=4;i<=7;+i)address.push_back(user_instruction[i]);
-	address_data[address] = A;
+	address_data[hex_to_dec(address)] = A;
 }
 
 void SET(string &user_instruction)
@@ -119,7 +119,7 @@ void SET(string &user_instruction)
 	{
 		for(int i=10;i<=user_instruction.size()-2;++i)str_data.push_back(user_instruction[i]);
 		int int_data = hex_to_dec(str_data);
-		address_data[address] = int_data;
+		address_data[hex_to_dec(address)] = int_data;
 	}
 	else cout<<"Invalid address or data\n";
 }
@@ -128,20 +128,20 @@ void SHLD(string &user_instruction)
 {
 	string address = "";
 	for(int i=5;i<=8;++i)address.push_back(user_instruction[i]);
-	address_data[address] = L;
+	address_data[hex_to_dec(address)] = L;
 	int temp = hex_to_dec(address);
 	++temp;
-	address_data[dec_to_hex(temp)] = H;
+	address_data[temp] = H;
 }
 
 void LHLD(string &user_instruction)
 {
 	string address = "";
 	for(int i=5;i<=8;++i)address.push_back(user_instruction[i]);
-	L = address_data[address];
+	L = address_data[hex_to_dec(address)];
 	int temp = hex_to_dec(address);
 	++temp;
-	H = address_data[dec_to_hex(temp)];
+	H = address_data[temp];
 }
 
 void XCHG()
@@ -181,15 +181,15 @@ void STAX(string &user_instruction)
 	{
 		case 'B':
 				address = dec_to_hex(B)+dec_to_hex(C);
-				address_data[address] = A;
+				address_data[hex_to_dec(address)] = A;
 				break;
 		case 'D':
 				address = dec_to_hex(D)+dec_to_hex(E);
-				address_data[address] = A;
+				address_data[hex_to_dec(address)] = A;
 				break;
 		case 'H':
 				address = dec_to_hex(H)+dec_to_hex(L);
-				address_data[address] = A;
+				address_data[hex_to_dec(address)] = A;
 				break;
 		default: 
 				cout<<"You found a bug!";

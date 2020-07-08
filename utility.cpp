@@ -18,11 +18,10 @@ int hex_to_dec(string s)
 	return result;
 }
 
-string dec_to_hex(int number,bool bit_8_16)
+string dec_to_hex(int &number)
 {
 	int shift_bit=1,shifting=8,counter=1,dec_val=0,mul_val=1;
 	string hex_val;
-	if(bit_8_16)shifting=16;
 	for(int i=0;i<shifting;++i)
 	{
 		if(number&shift_bit)dec_val+=mul_val;

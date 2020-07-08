@@ -231,7 +231,7 @@ void INR(string &user_instruction)
 void INX(string &user_instruction)
 {
 	SF=0,ZF=0,AC=0,PF=0,CF=0;
-	int tmp;
+	int temp;
 	switch(user_instruction[4])
 	{
 		case 'B':
@@ -274,7 +274,7 @@ void INX(string &user_instruction)
 void DCX(string &user_instruction)
 {
 	SF=0,ZF=0,AC=0,PF=0,CF=0;
-	int tmp;
+	int temp;
 	switch(user_instruction[4])
 	{
 		case 'B':

@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 unordered_map<int,string>display_content;
-unordered_map<string,int>address_data; //can be value or instruction
+unordered_map<int,int>address_data; //can be value or instruction
 unordered_map<int,string>address_instruction;
 string starting_address="";
 int next_address,end_address;
@@ -53,13 +53,12 @@ int main()
 		}
 	}
 	starting_address.pop_back();
-	next_address = dec_to_hex(starting_address);
-
+	next_address = hex_to_dec(starting_address);
+	string user_instruction,mne;
+	int n,i;
 	while(true)
 	{
 		check=1;
-		string user_instruction,mne;
-		int n,i;
 		while(check==1)
 		{
 			check = 0;
@@ -79,12 +78,12 @@ int main()
 				check=1;
 			}
 		}
-		if(mnemonics[mne]==27)break;
+		if(mnemonics[mne].first==27)break;
 		address_instruction[next_address] = user_instruction;
 		next_address+=mnemonics[mne].second-'0';
 	}
 
-	bool EOF =0,ERROR = 0;
+	bool eof=0,error=0;
 	end_address = next_address;
 	next_address = hex_to_dec(starting_address);
 	fstream display_content;
@@ -98,7 +97,7 @@ int main()
 			if(temp_address.size()!=4)
 			{
 				string temp;
-				for(i=0;i<4-temp_address.size())temp.push_back('0');
+				for(int i=0;i<4-temp_address.size();++i)temp.push_back('0');
 				temp+=temp_address;
 				temp_address=temp;
 			}
@@ -140,19 +139,19 @@ int main()
 						SET(user_instruction); // SET 2500, 05H || SET 2500, 0585H
 						break;
 				case 11:
-						ERROR = JMP(user_instruction);
+						error = JMP(user_instruction,next_address);
 						break;
 				case 12:
-						if(CF)ERROR = JC(user_instruction,next_address);
+						if(CF)error = JC(user_instruction,next_address);
 						break;
 				case 13:
-						if(!CF)ERROR = JNC(user_instruction,next_address);
+						if(!CF)error = JNC(user_instruction,next_address);
 						break;
 				case 14:
-						if(ZF)ERROR = JZ(user_instruction,next_address);
+						if(ZF)error = JZ(user_instruction,next_address);
 						break;
 				case 15:
-						if(!ZF)ERROR = JNZ(user_instruction,next_address);
+						if(!ZF)error = JNZ(user_instruction,next_address);
 						break;
 				case 16:
 						MOV(user_instruction); // MOV A, B
@@ -179,7 +178,7 @@ int main()
 						STAX(user_instruction);
 						break;
 				case 24:
-						XCHG(user_instruction); // XCHG
+						XCHG(); // XCHG
 						break;
 				case 25:
 						CMA(); // CMA
@@ -189,7 +188,7 @@ int main()
 						break;
 				case 27:
 						end_address = next_address;
-						EOF = 1;
+						eof = 1;
 						break;
 				/*case 28:
 						HELP(user_instruction);
@@ -198,7 +197,7 @@ int main()
 						cout<<"You found a bug\n";
 			}
 
-			if(EOF)break;
+			if(eof)break;
 			SF=0,ZF=0,AC=0,PF=0,CF=0;
 			display_content<<to_string(SF)+" "+to_string(ZF)+" "+to_string(AC)+" "+to_string(PF)+" "+to_string(CF)+"  ";
 
@@ -213,11 +212,11 @@ int main()
 
 			next_address+=mnemonics[mne].second-'0';
 		}
-		else ERROR = 1;
-		if(ERROR)break;
+		else error = 1;
+		if(error)break;
 	}
 	display_content.close();
-	if(ERROR)cout<<"ERROR occured!";
+	if(error)cout<<"ERROR occured!";
 	else 
 	{
 		display_content.open("display_content.txt",ios::in); //open a file to perform read operation using file object

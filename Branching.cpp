@@ -39,7 +39,7 @@ bool JZ(string &user_instruction,int &next_address)
 	int add_int = hex_to_dec(address_temp);
 	if(address_instruction.find(add_int)!=address_instruction.end())next_address = add_int;
 	else return true;
-	JZ = 0;
+	ZF = 0;
 	return false;
 }
 
