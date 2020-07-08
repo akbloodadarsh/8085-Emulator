@@ -52,6 +52,7 @@ int main()
 			}
 		}
 	}
+
 	starting_address.pop_back();
 	next_address = hex_to_dec(starting_address);
 	string user_instruction,mne;
@@ -65,7 +66,7 @@ int main()
 			mne="";
 			cout<<"Enter a Instruction\n";
 			getline(cin>>ws,user_instruction);
-			for(auto i:user_instruction)i=toupper(i);
+			for(int i=0;i<user_instruction.size();++i)user_instruction[i]=toupper(user_instruction[i]);
 			i=0;
 			while(i<user_instruction.size() &&  user_instruction[i]!=' ')
 			{
@@ -79,16 +80,19 @@ int main()
 			}
 		}
 		if(mnemonics[mne].first==27)break;
-		address_instruction[next_address] = user_instruction;
+		address_instruction[next_address] += user_instruction;
 		next_address+=mnemonics[mne].second-'0';
 	}
 
 	bool eof=0,error=0;
 	end_address = next_address;
+	cout<<next_address<<"\n";
 	next_address = hex_to_dec(starting_address);
-	fstream display_content;
-	display_content.open("display_content.txt",ios::out); 
-	while(next_address<=end_address)
+	//cout<<next_address<<"\n";
+	// cout<<next_address<<"\n";
+	// 	cout<<address_instruction[next_address]<<"\n";
+		
+	while(next_address<end_address)
 	{
 		if(address_instruction.find(next_address)!=address_instruction.end())
 		{
@@ -101,10 +105,17 @@ int main()
 				temp+=temp_address;
 				temp_address=temp;
 			}
-			display_content<<temp_address+"H  ";
-			display_content<<user_instruction+"  ";
+			display_content[next_address]+=temp_address+"H  ";
+			display_content[next_address]+=user_instruction+"  ";
 
-
+			for(int i=0;i<user_instruction.size();++i)user_instruction[i]=toupper(user_instruction[i]);
+			mne = "";
+			i=0;
+			while(i<user_instruction.size() &&  user_instruction[i]!=' ')
+			{
+				mne.push_back(user_instruction[i]);
+				++i;
+			}
 			int instruction_id = mnemonics[mne].first;
 			switch(instruction_id)
 			{
@@ -199,35 +210,39 @@ int main()
 
 			if(eof)break;
 			SF=0,ZF=0,AC=0,PF=0,CF=0;
-			display_content<<to_string(SF)+" "+to_string(ZF)+" "+to_string(AC)+" "+to_string(PF)+" "+to_string(CF)+"  ";
+			display_content[next_address]+=to_string(SF)+" "+to_string(ZF)+" "+to_string(AC)+" "+to_string(PF)+" "+to_string(CF)+"  ";
 
-			int A=0,B=0,C=0,D=0,E=0,H=0,L=0;
-			display_content<<dec_to_hex(A)+"H"+" ";
-			display_content<<dec_to_hex(B)+"H"+" ";
-			display_content<<dec_to_hex(C)+"H"+" ";
-			display_content<<dec_to_hex(D)+"H"+" ";
-			display_content<<dec_to_hex(E)+"H"+" ";
-			display_content<<dec_to_hex(H)+"H"+" ";
-			display_content<<dec_to_hex(L)+"H"+"\n";
+			display_content[next_address]+=dec_to_hex(A)+"H"+" ";
+			display_content[next_address]+=dec_to_hex(B)+"H"+" ";
+			display_content[next_address]+=dec_to_hex(C)+"H"+" ";
+			display_content[next_address]+=dec_to_hex(D)+"H"+" ";
+			display_content[next_address]+=dec_to_hex(E)+"H"+" ";
+			display_content[next_address]+=dec_to_hex(H)+"H"+" ";
+			display_content[next_address]+=dec_to_hex(L)+"H"+"\n";
 
 			next_address+=mnemonics[mne].second-'0';
 		}
-		else error = 1;
-		if(error)break;
+		else
+		{
+			cout<<"e1"<<"\n";
+				error = 1;
+		}
+		if(error)
+		{cout<<"e2"<<"\n";
+
+				break;
+			}
 	}
-	display_content.close();
 	if(error)cout<<"ERROR occured!";
 	else 
 	{
-		display_content.open("display_content.txt",ios::in); //open a file to perform read operation using file object
-	   if(display_content.is_open()) //checking whether the file is open
-	   {   
-	      string tp;
-	      while(getline(display_content, tp)){ //read data from file object and put it into string.
-	         cout << tp << "\n"; //print the data of the string
-	      }
-	      display_content.close(); //close the file object.
-	   }
+		for(int i=hex_to_dec(starting_address);i<=end_address;++i)
+		{
+			if(display_content.find(i)!=display_content.end())
+			{
+				cout<<display_content[i];
+			}
+		}
 	}
 	return 0;
 }
