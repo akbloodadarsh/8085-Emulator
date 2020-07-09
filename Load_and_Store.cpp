@@ -113,7 +113,7 @@ void SET(string &user_instruction)
 	for(int i=4;i<=7;++i)address.push_back(user_instruction[i]);
 	if(hex_to_dec(address)>=hex_to_dec(starting_address) && hex_to_dec(address)<=hex_to_dec("FFFF"))
 	{
-		for(int i=10;i<=user_instruction.size()-2;++i)str_data.push_back(user_instruction[i]);
+		for(int i=11;i<=user_instruction.size()-2;++i)str_data.push_back(user_instruction[i]);
 		int int_data = hex_to_dec(str_data);
 		address_data[hex_to_dec(address)] = int_data;
 	}
@@ -154,16 +154,16 @@ void LXI(string &user_instruction)
 	switch(user_instruction[4])
 	{
 		case 'B':
-				C = address_data[hex_to_dec(address2)];
-				B = address_data[hex_to_dec(address1)];	
+				C = hex_to_dec(address2);
+				B = hex_to_dec(address1);	
 				break;
 		case 'D':
-				E = address_data[hex_to_dec(address2)];
-				D = address_data[hex_to_dec(address1)];
+				E = hex_to_dec(address2);
+				D = hex_to_dec(address1);
 				break;
 		case 'H':
-				L = address_data[hex_to_dec(address2)];
-				H = address_data[hex_to_dec(address1)];
+				L = hex_to_dec(address2);
+				H = hex_to_dec(address1);
 				break;
 		default: 
 				cout<<"You found a bug!";
@@ -191,4 +191,3 @@ void STAX(string &user_instruction)
 				cout<<"You found a bug!";
 	}
 }
-
