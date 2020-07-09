@@ -9,7 +9,7 @@ void CMA()
 void CMP(string &user_instruction)
 {
 	SF=0,ZF=0,AC=0,PF=0,CF=0;
-	int tmp;
+	int tmp=0;
 	switch(user_instruction[4])
 	{
 		case 'A':
