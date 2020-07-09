@@ -4,9 +4,7 @@ using namespace std;
 void MOV(string &user_instruction)
 {
 	int tmp;
-	int i=user_instruction.size()-1;
-	while(i>=0 && user_instruction[i]<'A' && user_instruction[i]>'Z')--i;
-	switch(user_instruction[i])
+	switch(user_instruction[7])
 	{
 		case 'A':
 				tmp=A;
@@ -30,11 +28,9 @@ void MOV(string &user_instruction)
 				tmp=L;
 				break;
 		default: 
-				cout<<"You found a bug!";
+				cout<<"You found a bug!\n";
 	}
-	--i;
-	while(i>=0 && user_instruction[i]<'A' && user_instruction[i]>'Z')--i;
-	switch(user_instruction[i])
+	switch(user_instruction[4])
 	{
 		case 'A':
 				A=tmp;
@@ -58,7 +54,7 @@ void MOV(string &user_instruction)
 				L=tmp;
 				break;
 		default: 
-				cout<<"You found a bug!";
+				cout<<"You found a bug!\n";
 	}
 }
 
@@ -106,7 +102,7 @@ void LDA(string &user_instruction)
 void STA(string &user_instruction)
 {
 	string address = "";
-	for(int i=4;i<=7;+i)address.push_back(user_instruction[i]);
+	for(int i=4;i<=7;++i)address.push_back(user_instruction[i]);
 	address_data[hex_to_dec(address)] = A;
 }
 

@@ -1,12 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
+string starting_address="";
+int next_address,end_address,A=0,B=0,C=0,D=0,E=0,H=0,L=0;
+bool SF=0,ZF=0,AC=0,PF=0,CF=0;
 unordered_map<int,string>display_content;
 unordered_map<int,int>address_data; //can be value or instruction
 unordered_map<int,string>address_instruction;
-string starting_address="";
-int next_address,end_address;
-int A=0,B=0,C=0,D=0,E=0,H=0,L=0;
-bool SF=0,ZF=0,AC=0,PF=0,CF=0;
 #include"Mnemonics.cpp"
 #include"utility.cpp"
 #include"Arithmetic.cpp"
@@ -86,12 +85,7 @@ int main()
 
 	bool eof=0,error=0;
 	end_address = next_address;
-	cout<<next_address<<"\n";
 	next_address = hex_to_dec(starting_address);
-	//cout<<next_address<<"\n";
-	// cout<<next_address<<"\n";
-	// 	cout<<address_instruction[next_address]<<"\n";
-		
 	while(next_address<end_address)
 	{
 		if(address_instruction.find(next_address)!=address_instruction.end())
@@ -210,7 +204,7 @@ int main()
 
 			if(eof)break;
 			SF=0,ZF=0,AC=0,PF=0,CF=0;
-			display_content[next_address]+=to_string(SF)+" "+to_string(ZF)+" "+to_string(AC)+" "+to_string(PF)+" "+to_string(CF)+"  ";
+			display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
 
 			display_content[next_address]+=dec_to_hex(A)+"H"+" ";
 			display_content[next_address]+=dec_to_hex(B)+"H"+" ";
@@ -224,18 +218,14 @@ int main()
 		}
 		else
 		{
-			cout<<"e1"<<"\n";
 				error = 1;
 		}
-		if(error)
-		{cout<<"e2"<<"\n";
-
-				break;
-			}
+		if(error)break;
 	}
 	if(error)cout<<"ERROR occured!";
 	else 
 	{
+		cout<<"Addr   Mne      SF ZF AC PF CF   A   B   C   D   E   H   L\n";
 		for(int i=hex_to_dec(starting_address);i<=end_address;++i)
 		{
 			if(display_content.find(i)!=display_content.end())
