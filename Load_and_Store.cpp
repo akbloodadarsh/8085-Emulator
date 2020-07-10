@@ -28,6 +28,7 @@ void MOV(string &user_instruction)
 				tmp=L;
 				break;
 		default: 
+				error = 1;
 				cout<<"You found a bug!\n";
 	}
 	switch(user_instruction[4])
@@ -54,6 +55,7 @@ void MOV(string &user_instruction)
 				L=tmp;
 				break;
 		default: 
+				error = 1;
 				cout<<"You found a bug!\n";
 	}
 }
@@ -88,7 +90,8 @@ void MVI(string &user_instruction)
 				L=tmp;
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 }
 
@@ -165,8 +168,9 @@ void LXI(string &user_instruction)
 				L = hex_to_dec(address2);
 				H = hex_to_dec(address1);
 				break;
-		default: 
-				cout<<"You found a bug!";
+		default:
+				error = 1; 
+				cout<<"You found a bug!\n";
 	}
 }
 
@@ -188,6 +192,7 @@ void STAX(string &user_instruction)
 				address_data[hex_to_dec(address)] = A;
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 }

@@ -105,7 +105,8 @@ void ADD(string &user_instruction)
 				A=flag_on_off_8bit_ADD(A,L);
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 }
 
@@ -156,7 +157,8 @@ void SUB(string &user_instruction)
 				A=flag_on_off_8bit_SUB(A,L);
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 }
 
@@ -189,7 +191,8 @@ void DCR(string &user_instruction)
 				L=flag_on_off_8bit_SUB(L,tmp);
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 	CF = tmp_CF;
 }
@@ -223,7 +226,8 @@ void INR(string &user_instruction)
 				L=flag_on_off_8bit_ADD(L,tmp);
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 	CF = tmp_CF;
 }
@@ -244,7 +248,8 @@ void INX(string &user_instruction)
 				temp = hex_to_dec(dec_to_hex(H)+dec_to_hex(L));
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 	++temp;
 	if(temp>hex_to_dec("FFFF"))temp-=hex_to_dec("FFFF")+1;
@@ -267,7 +272,8 @@ void INX(string &user_instruction)
 				H = address_data[hex_to_dec(address1)];
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 }
 
@@ -287,7 +293,8 @@ void DCX(string &user_instruction)
 				temp = hex_to_dec(dec_to_hex(H)+dec_to_hex(L));
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 	--temp;
 	if(temp<0)temp+=hex_to_dec("FFFF")+1;
@@ -310,7 +317,8 @@ void DCX(string &user_instruction)
 				H = address_data[hex_to_dec(address1)];
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 }
 
@@ -330,7 +338,8 @@ void DAD(string &user_instruction)
 				val2 = val1;
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 	val1+=val2;
 	if(val1>hex_to_dec("FFFF"))
@@ -338,10 +347,13 @@ void DAD(string &user_instruction)
 		CF=1;
 		val1-=hex_to_dec("FFFF")+1;
 	}
-	string val = dec_to_hex(val1);
+	cout<<val1<<"\n";
+	string val = DAD_dec_to_hex(val1);
+	cout<<val<<"\n";
 	string address1 = "",address2 = "";
 	for(int i=0;i<=1;++i)address1.push_back(val[i]);
 	for(int i=2;i<=3;++i)address2.push_back(val[i]);
-	L = address_data[hex_to_dec(address2)];
-	H = address_data[hex_to_dec(address1)];
+	cout<<address1<<" "<<address2<<"\n";
+	L = hex_to_dec(address2);
+	H = hex_to_dec(address1);
 }

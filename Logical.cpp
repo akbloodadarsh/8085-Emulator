@@ -34,7 +34,8 @@ void CMP(string &user_instruction)
 				tmp=flag_on_off_8bit_SUB(A,L);
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 	cout<<tmp<<"\n";
 }
