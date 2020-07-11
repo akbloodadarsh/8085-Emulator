@@ -66,7 +66,7 @@ int flag_on_off_8bit_SUB(int &val1,int &val2)
 	if(!val)ZF=1;
 	if(val<0)
 	{
-		val+=256;
+		val*=-1;
 	}
 	return val;
 }
