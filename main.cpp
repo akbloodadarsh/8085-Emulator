@@ -288,7 +288,7 @@ int main()
 		{
 			if(display_content.find(i)!=display_content.end())
 			{
-				for(int j=0;j<69;++j)
+				for(int j=0;j<68;++j)
 				cout<<display_content[i][j];
 				cout<<"\n";
 			}
