@@ -41,7 +41,7 @@ string dec_to_hex(int &number)
 	return hex_val;
 }
 
-string DAD_dec_to_hex(int &number)
+string dec_to_hex16(int &number)
 {
 	int shift_bit=1,shifting=16,counter=1,dec_val=0,mul_val=1;
 	string hex_val;	

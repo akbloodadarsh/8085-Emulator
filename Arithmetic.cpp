@@ -252,24 +252,24 @@ void INX(string &user_instruction)
 				cout<<"You found a bug!\n";
 	}
 	++temp;
-	if(temp>hex_to_dec("FFFF"))temp-=hex_to_dec("FFFF")+1;
-	string val = dec_to_hex(temp);
+	if(temp>hex_to_dec("FFFF"))temp-=hex_to_dec("FFFF");
+	string val = dec_to_hex16(temp);
 	string address1 = "",address2 = "";
 	for(int i=0;i<=1;++i)address1.push_back(val[i]);
 	for(int i=2;i<=3;++i)address2.push_back(val[i]);
 	switch(user_instruction[4])
 	{
 		case 'B':
-				C = address_data[hex_to_dec(address2)];
-				B = address_data[hex_to_dec(address1)];	
+				C = hex_to_dec(address2);
+				B = hex_to_dec(address1);	
 				break;
 		case 'D':
-				E = address_data[hex_to_dec(address2)];
-				D = address_data[hex_to_dec(address1)];
+				E = hex_to_dec(address2);
+				D = hex_to_dec(address1);
 				break;
 		case 'H':
-				L = address_data[hex_to_dec(address2)];
-				H = address_data[hex_to_dec(address1)];
+				L = hex_to_dec(address2);
+				H = hex_to_dec(address1);
 				break;
 		default: 
 				error = 1;
@@ -297,24 +297,26 @@ void DCX(string &user_instruction)
 				cout<<"You found a bug!\n";
 	}
 	--temp;
-	if(temp<0)temp+=hex_to_dec("FFFF")+1;
-	string val = dec_to_hex(temp);
+	cout<<temp<<"\n";
+	if(temp<0)temp*=-1;
+	cout<<temp<<"\n";
+	string val = dec_to_hex16(temp);
 	string address1 = "",address2 = "";
 	for(int i=0;i<=1;++i)address1.push_back(val[i]);
 	for(int i=2;i<=3;++i)address2.push_back(val[i]);
 	switch(user_instruction[4])
 	{
 		case 'B':
-				C = address_data[hex_to_dec(address2)];
-				B = address_data[hex_to_dec(address1)];	
+				C = hex_to_dec(address2);
+				B = hex_to_dec(address1);	
 				break;
 		case 'D':
-				E = address_data[hex_to_dec(address2)];
-				D = address_data[hex_to_dec(address1)];
+				E = hex_to_dec(address2);
+				D = hex_to_dec(address1);
 				break;
 		case 'H':
-				L = address_data[hex_to_dec(address2)];
-				H = address_data[hex_to_dec(address1)];
+				L = hex_to_dec(address2);
+				H = hex_to_dec(address1);
 				break;
 		default: 
 				error = 1;
@@ -348,7 +350,7 @@ void DAD(string &user_instruction)
 		val1-=hex_to_dec("FFFF")+1;
 	}
 	cout<<val1<<"\n";
-	string val = DAD_dec_to_hex(val1);
+	string val = dec_to_hex16(val1);
 	cout<<val<<"\n";
 	string address1 = "",address2 = "";
 	for(int i=0;i<=1;++i)address1.push_back(val[i]);

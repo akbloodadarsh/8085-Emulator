@@ -108,7 +108,7 @@ int main()
 		next_address+=mnemonics[mne].second-'0';
 	}
 
-	bool eof=0;
+	bool eof=0,jump_setter=0,no_extra_print = 0,jump=0;
 	end_address = next_address;
 	next_address = hex_to_dec(starting_address);
 	while(next_address<end_address)
@@ -124,10 +124,12 @@ int main()
 				temp+=temp_address;
 				temp_address=temp;
 			}
-			display_content[next_address]+=temp_address+"H  ";
-			display_content[next_address]+=user_instruction;
-			for(int i=display_content[next_address].size();i<=25;++i)display_content[next_address].push_back(' ');
-
+			if(!no_extra_print)
+			{
+				display_content[next_address]+=temp_address+"H  ";
+				display_content[next_address]+=user_instruction;
+				for(int i=display_content[next_address].size();i<=25;++i)display_content[next_address].push_back(' ');
+			}
 			for(int i=0;i<user_instruction.size();++i)user_instruction[i]=toupper(user_instruction[i]);
 			mne = "";
 			i=0;
@@ -170,19 +172,49 @@ int main()
 						SET(user_instruction); // SET 2500, 05H
 						break;
 				case 11:
+						display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+						display_content[next_address]+=dec_to_hex(A)+"H"+" ";
+						display_content[next_address]+=dec_to_hex(B)+"H"+" ";
+						display_content[next_address]+=dec_to_hex(C)+"H"+" ";
+						display_content[next_address]+=dec_to_hex(D)+"H"+" ";
+						display_content[next_address]+=dec_to_hex(E)+"H"+" ";
+						display_content[next_address]+=dec_to_hex(H)+"H"+" ";
+						display_content[next_address]+=dec_to_hex(L)+"H";
 						error = JMP(user_instruction,next_address);
+						jump = 1;
 						break;
 				case 12:
-						if(CF)error = JC(user_instruction,next_address);
+						if(CF)
+						{
+							jump_setter = 1;
+							no_extra_print = 1;
+							error = JC(user_instruction,next_address);
+						}
 						break;
 				case 13:
-						if(!CF)error = JNC(user_instruction,next_address); //
+						if(!CF)
+						{
+							jump_setter = 1;
+							no_extra_print = 1;
+							error = JNC(user_instruction,next_address); //
+						}
 						break;
 				case 14:
-						if(ZF)error = JZ(user_instruction,next_address); //
+						if(ZF)
+						{
+							jump_setter = 1;
+							no_extra_print = 1;
+							error = JZ(user_instruction,next_address); //
+							cout<<next_address<<"\n";
+						}
 						break;
 				case 15:
-						if(!ZF)error = JNZ(user_instruction,next_address); //
+						if(!ZF)
+						{
+							jump_setter = 1;
+							no_extra_print = 1;
+							error = JNZ(user_instruction,next_address); //
+						}
 						break;
 				case 16:
 						MOV(user_instruction); // MOV A, B
@@ -228,34 +260,37 @@ int main()
 						error = 1;
 						cout<<"You found a bug\n";
 			}
-
+			//cout<<display_content[next_address]<<"\n";
 			if(eof)break;
-			display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
-			display_content[next_address]+=dec_to_hex(A)+"H"+" ";
-			display_content[next_address]+=dec_to_hex(B)+"H"+" ";
-			display_content[next_address]+=dec_to_hex(C)+"H"+" ";
-			display_content[next_address]+=dec_to_hex(D)+"H"+" ";
-			display_content[next_address]+=dec_to_hex(E)+"H"+" ";
-			display_content[next_address]+=dec_to_hex(H)+"H"+" ";
-			display_content[next_address]+=dec_to_hex(L)+"H"+"\n";
-
-			next_address+=mnemonics[mne].second-'0';
+			if(!jump_setter && !jump)
+			{
+				display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+				display_content[next_address]+=dec_to_hex(A)+"H"+" ";
+				display_content[next_address]+=dec_to_hex(B)+"H"+" ";
+				display_content[next_address]+=dec_to_hex(C)+"H"+" ";
+				display_content[next_address]+=dec_to_hex(D)+"H"+" ";
+				display_content[next_address]+=dec_to_hex(E)+"H"+" ";
+				display_content[next_address]+=dec_to_hex(H)+"H"+" ";
+				display_content[next_address]+=dec_to_hex(L)+"H";
+				next_address+=mnemonics[mne].second-'0';
+			}
+			jump = 0;
+			jump_setter = 0;
 		}
-		else
-		{
-				error = 1;
-		}
+		else error = 1;
 		if(error)break;
 	}
 	if(error)cout<<"ERROR occured!\n";
 	else 
 	{
 		cout<<"Addr      Mne             SF ZF AC PF CF  A   B   C   D   E   H   L\n";
-		for(int i=hex_to_dec(starting_address);i<=end_address;++i)
+		for(int i=hex_to_dec(starting_address);i<end_address;++i)
 		{
 			if(display_content.find(i)!=display_content.end())
 			{
-				cout<<display_content[i];
+				for(int j=0;j<69;++j)
+				cout<<display_content[i][j];
+				cout<<"\n";
 			}
 		}
 	}
