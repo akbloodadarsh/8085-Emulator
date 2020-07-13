@@ -16,8 +16,8 @@ unordered_map<int,int>address_data; //can be value or instruction
 int main()
 {
 	int break_line=-1;
-	bool check=1,debugger_mode = 0,run=0,step=0;
-	string user_instruction,mne;
+	bool check=1,debugger_mode = 0,run=0,step=0,file_mode=0;
+	string user_instruction,mne,code_file;
 	while(check==1)
 	{
 		check=0;
@@ -113,23 +113,55 @@ int main()
 				if(char_to_int.find(starting_address[i])==char_to_int.end())
 				{
 					cout<<"Enter a valid address\n";
-					check=1;break;
+					check=1;
+					break;
 				}
 			}
 		}
 	}
+
+	while(1)
+	{
+		char temp;
+		cout<<"Do you want to take input from a file?(y/n)\n";
+		cin>>temp;
+		if(tolower(temp)=='y')
+		{
+			cout<<"Enter the file location\n";
+    		cin>>code_file;
+    		while(1)
+			{
+				ifstream fp(code_file);
+				if(fp.is_open())
+				{
+					fp.close();
+					break;
+				}
+				else 
+				{
+					fp.close();
+					cout<<"Re-enter the file location. Ex:- filename.txt\n";
+					cin>>code_file;
+				}
+			}
+			file_mode=1;
+			break;
+		}
+		if(tolower(temp)=='n')break;
+		cout<<"Not a valid answer! Retry again!\n";	
+	}
+
 	starting_address.pop_back();
 	next_address = hex_to_dec(starting_address);
 	int n,i;
-	while(true)
+
+	if(file_mode)
 	{
-		check=1;
-		while(check)
+		bool exit_set = 0;
+		ifstream fp(code_file);
+		while(getline(fp,user_instruction))
 		{
-			check = 0;
 			mne="";
-			cout<<"Enter a Instruction\n";
-			getline(cin>>ws,user_instruction);
 			for(int i=0;i<user_instruction.size();++i)user_instruction[i]=toupper(user_instruction[i]);
 			i=0;
 			while(i<user_instruction.size() &&  user_instruction[i]!=' ')
@@ -139,13 +171,13 @@ int main()
 			}
 			if(mnemonics.find(mne)==mnemonics.end())
 			{
-				cout<<"Instruction not found\nRe-enter correct Instruction or type HELP for debugger\n";
-				check=1;
+				cout<<"Instruction not found\nRe-enter correct Instruction in the file\n";
+				exit_set=1;
 			}
 			else if(instruction_size[mnemonics[mne].first].first!=user_instruction.size())
 			{
 				cout<<mne<<" instruction Example:- "<<instruction_size[mnemonics[mne].first].second<<"\n";
-				cout<<"Re-enter correct Instruction or type HELP for debugger\n";
+				cout<<"Re-enter correct Instruction in the file\n";
 				if(user_instruction.size()>instruction_size[mnemonics[mne].first].first)
 				{
 					cout<<"Did you mean:-  ";
@@ -161,12 +193,68 @@ int main()
 					}
 					cout<<"\n";
 				}
-				check=1;	
+				exit_set=1;	
 			}
+			if(exit_set)
+			{
+				cout<<"closing 8085 emulator\n";
+				exit(0);
+			}
+			if(mnemonics[mne].first==27)break;
+			address_instruction[next_address] += user_instruction;
+			next_address+=mnemonics[mne].second-'0';
 		}
-		if(mnemonics[mne].first==27)break;
-		address_instruction[next_address] += user_instruction;
-		next_address+=mnemonics[mne].second-'0';
+		fp.close();
+	}
+	else
+	{
+		while(true)
+		{
+			check=1;
+			while(check)
+			{
+				check = 0;
+				mne="";
+				cout<<"Enter a Instruction\n";
+				getline(cin>>ws,user_instruction);
+				for(int i=0;i<user_instruction.size();++i)user_instruction[i]=toupper(user_instruction[i]);
+				i=0;
+				while(i<user_instruction.size() &&  user_instruction[i]!=' ')
+				{
+					mne.push_back(user_instruction[i]);
+					++i;
+				}
+				if(mnemonics.find(mne)==mnemonics.end())
+				{
+					cout<<"Instruction not found\nRe-enter correct Instruction or type HELP for debugger\n";
+					check=1;
+				}
+				else if(instruction_size[mnemonics[mne].first].first!=user_instruction.size())
+				{
+					cout<<mne<<" instruction Example:- "<<instruction_size[mnemonics[mne].first].second<<"\n";
+					cout<<"Re-enter correct Instruction or type HELP for debugger\n";
+					if(user_instruction.size()>instruction_size[mnemonics[mne].first].first)
+					{
+						cout<<"Did you mean:-  ";
+						for(int i=0;i<instruction_size[mnemonics[mne].first].first-1;++i)cout<<user_instruction[i];
+						unordered_set<char>registers({'A','B','C','D','E','H','L'});
+						if(registers.find(user_instruction[instruction_size[mnemonics[mne].first].first-1])!=registers.end())
+						{
+							cout<<user_instruction[instruction_size[mnemonics[mne].first].first-1];
+						}
+						else
+						{
+							cout<<"valid register name";
+						}
+						cout<<"\n";
+					}
+					check=1;	
+				}
+			}
+			if(mnemonics[mne].first==27)break;
+			address_instruction[next_address] += user_instruction;
+			next_address+=mnemonics[mne].second-'0';
+		}
 	}
 	int temp;
 	bool eof=0,jump_setter=0,no_extra_print = 0,jump=0,other_jump = 0;
