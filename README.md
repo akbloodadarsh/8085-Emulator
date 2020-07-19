@@ -20,6 +20,9 @@ During the addition, we will check from which register we are performing the add
 - <a href="https://www.tutorialspoint.com/instruction-type-dad-rp-in-8085-microprocessor">DAD</a>: We have to combine the values stored in HL register pair to create the actual number & after that we have to check from which register pair we have to perform addition operation then, we have to combine the content of the registers pairs to create the actual number and perform addition and then we have to update the content of HL register pair with the resultant value.
 
 ## LOGICAL
+<p align="center">
+  <img src="https://github.com/akbloodadarsh/None-of-your-concern/blob/master/8085-Emulator/logical.png">
+</p>
 - <a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/Logical.cpp">Logical.cpp</a>: This file contains all the logical operations:
 - <a href="https://www.tutorialspoint.com/instruction-to-complement-accumulator-in-8085-microprocessor">CMA</a>: One's compliment the content of accumulator.
 - <a href="#">CMP</a>: Check from which register we have to compare the content of the accumulator & output the difference of the given register and accumulator.
