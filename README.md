@@ -36,6 +36,7 @@
 <p align="center">
   <img src="https://github.com/akbloodadarsh/None-of-your-concern/blob/master/8085-Emulator/logical.png">
 </p>
+
 - <a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/Logical.cpp">Logical.cpp</a>: This file contains all the logical operations:
 - <a href="https://www.tutorialspoint.com/instruction-to-complement-accumulator-in-8085-microprocessor">CMA</a>: One's compliment the content of accumulator.
 - <a href="#">CMP</a>: Check from which register we have to compare the content of the accumulator & output the difference of the given register and accumulator.
