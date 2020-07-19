@@ -1,5 +1,7 @@
 # 8085-Emulator
-
+<p align="center">
+  <img src="https://github.com/akbloodadarsh/None-of-your-concern/blob/master/8085-Emulator/8085_working.png">
+</p>
 ## Arithmetic
 - <a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/Arithmetic.cpp">Arithmetic.cpp</a>:This file contains all the arithmetic operations:
 -  <a href="https://www.tutorialspoint.com/instruction-type-add-r-in-8085-microprocessor">ADD</a>:
