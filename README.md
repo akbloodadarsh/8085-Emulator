@@ -44,7 +44,13 @@ During the addition, we will check from which register we are performing the add
 
 
 ## DEBUGGER INSTRUCTIONS
-- <a href="#">SET</a>: We will convert the hexadecimal address to decimal address & convert the hexadecimal data to decimal data and use adress_data to store the data to that address.
+- <a href="#">SET</a>: We will convert the hexadecimal address to decimal address & convert the hexadecimal data to decimal data and use adress_data to store the data to that address. Ex:- SET 2500H, 05H
+- <a href="#">break or b</a>: It will stop the execution of the pragram when it reaches the specified address. Ex:- break 2500H or b 2500H
+- <a href="#">step or s</a>: It will run program one instruction at a time and ask if you want to use debugger, if yes you enter debugger mode else it will run the next instruction.Ex:- step or s
+- <a href="#">print or p</a>: It prints the value of register or value present at memory location. Ex:- print A or p B or print 2500H or p 5000H 
+- <a href="#">quit or q</a>: quits the debugger. Ex:- quit or q
+<a href="#">help</a>: will show commands of the debugger. Ex:- help
+
 
 # EXTRA FEATURES
 - If you accidentally input some invalid starting address Ex:- 01,425544646. It will tell you to input a valid starting address.
@@ -66,9 +72,6 @@ During the addition, we will check from which register we are performing the add
  <li>dec_to_hex:- It takes  (integer)decimal number as input & return its hexadecimal equivalent which is string type.</li>
  <li>dec_to_hex16:- It takes  (integer)decimal number as input & return its 16bit hexadecimal equivalent which is string type.</li>
 </ol>
-
-
-
 
 ### Contribute
 
