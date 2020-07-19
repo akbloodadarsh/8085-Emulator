@@ -68,7 +68,7 @@
 - <a href="#">step or s</a>: It will run program one instruction at a time and ask if you want to use debugger, if yes you enter debugger mode else it will run the next instruction.Ex:- step or s
 - <a href="#">print or p</a>: It prints the value of register or value present at memory location. Ex:- print A or p B or print 2500H or p 5000H 
 - <a href="#">quit or q</a>: quits the debugger. Ex:- quit or q
-<a href="#">help</a>: will show commands of the debugger. Ex:- help
+- <a href="#">help</a>: will show commands of the debugger. Ex:- help
 
 
 # EXTRA FEATURES
