@@ -47,6 +47,15 @@ During the addition, we will check from which register we are performing the add
 - <a href="#">SET</a>: We will convert the hexadecimal address to decimal address & convert the hexadecimal data to decimal data and use adress_data to store the data to that address.
 
 
+## EXTRA FILES DESCRIPTION
+- <a href="#">mnemonics.cpp</a>: It contains unordered maps for:
+<ol> 
+ <li>mnemonics:- It contains opcodes as key & theirID's & their size as values.</li>
+ <li>instruction_size:- It contains opcode id as key & instruction size & instruction example as value.</li>
+ <li>char_to_int:- It has hexadecimal digit as key & its decimal equivalent as value.</li>
+ <li>int_to_char:- It has decimal number as key & its hexadecimal equivalent as value.</li>
+</ol>
+
 
 
 
