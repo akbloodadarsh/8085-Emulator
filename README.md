@@ -24,11 +24,32 @@ During the addition, we will check from which register we are performing the add
 
 ## BRANCHING
 - <a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/Branching.cpp">Branching.cpp</a>: This file contains all the branching operations:
-- <a href="#">JMP</a>: It will covert the hexadecimal address to decimal and check if the address is free or not, if no then return true which signifies that their is a error else return false which means no error occured during this operation.
-- <a href="#">JC</a>: Before calling this function we will check if carry is set or not, if yes then only we will call this function,rest is same as JMP.
-- <a href="#">JNC</a>: Before calling this function we will check if carry is set or not, if not then only we will call this function,rest is same as JMP
-- <a href="https://www.tutorialspoint.com/jump-if-zero-jz-result-in-8085-microprocessor">JZ</a>: Before calling this function we will check if Zero Flag is set or not, if yes then only we will call this function,rest is same as JMP.
-- <a href="https://www.tutorialspoint.com/jump-if-zero-jz-result-in-8085-microprocessor">JZ</a>: Before calling this function we will check if Zero Flag is set or not, if not then only we will call this function,rest is same as JMP.
+- <a href="#">JMP</a>: It will covert the hexadecimal address to decimal and check if the address is free or not if no then return true which signifies that there is an error else return false which means no error occurred during this operation.
+- <a href="#">JC</a>: Before calling this function we will check if carry is set or not, if yes then only we will call this function, rest is same as JMP.
+- <a href="#">JNC</a>: Before calling this function we will check if carry is set or not, if not then only we will call this function, rest is same as JMP
+- <a href="https://www.tutorialspoint.com/jump-if-zero-jz-result-in-8085-microprocessor">JZ</a>: Before calling this function we will check if Zero Flag is set or not, if yes then only we will call this function, rest is same as JMP.
+- <a href="https://www.tutorialspoint.com/jump-if-zero-jz-result-in-8085-microprocessor">JZ</a>: Before calling this function we will check if Zero Flag is set or not, if not then only we will call this function, rest is same as JMP.
+
+## LOAD AND STORE
+- <a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/Load_and_Store.cpp">Load_and_Store.cpp</a>: This file contains all the load and store operations:
+- <a href="#">MOV</a>: We will check from which register we have to move the content, then we will store the content in a temporary variable and then we will check in which register we have to overwrite the content and update the content with the temporary variable value.
+- <a href="#">MVI</a>: We will convert the hexadecimal content to decimal content and store the content in a temporary variable and then we will check in which register we have to overwrite the content and update the content with the temporary variable value.
+- <a href="#">LDA</a>: We will convert the hexadecimal address to decimal address and use adress_data to check if there is some value stored at the address, if yes then store that value in the accumulator.
+- <a href="#">STA</a>: We will convert the hexadecimal address to decimal address and use adress_data to store the data of the accumulator to that address.
+- <a href="#">SHLD</a>: Store the content of register L in the given address and store the content of register H in the incremented address.
+- <a href="#">LHLD</a>: Store the content of given address in register L and the content of incremented address in register H.
+- <a href="#">XCHG</a>: Swap the content of register pair HL & DE.
+- <a href="#">LXI</a>: Store the address in the register pair after breaking the address into two & converting it to its decimal form.
+- <a href="#">STAX</a>: Extract the address from the given register pair & combine it to form the actual address and use that address to store the content of the accumulator at that address.
+
+
+## DEBUGGER INSTRUCTIONS
+- <a href="#">SET</a>: We will convert the hexadecimal address to decimal address & convert the hexadecimal data to decimal data and use adress_data to store the data to that address.
+
+
+
+
+
 
 ### Contribute
 
