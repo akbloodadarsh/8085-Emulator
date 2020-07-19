@@ -46,6 +46,10 @@ During the addition, we will check from which register we are performing the add
 ## DEBUGGER INSTRUCTIONS
 - <a href="#">SET</a>: We will convert the hexadecimal address to decimal address & convert the hexadecimal data to decimal data and use adress_data to store the data to that address.
 
+# EXTRA FEATURES
+- If you accidentally input some invalid starting address Ex:- 01,425544646. It will tell you to input a valid starting address.
+- You can give input from a file. After asking Do you want to take input from a file press 'y' & give the location of the file. If the input file is in the same folder which contains the program just input the file name with extension Ex:- file_name.txt, if the file is not found you will be asked to input a valid file location.
+- If the user input a partial correct instruction he will be given a correct suggestion Ex:- I/P ADD BLABLA  O/P Did you mean ADD B? or I/P ADD O/P Did you mean ADD valid_register_name
 
 ## EXTRA FILES DESCRIPTION
 - <a href="#">mnemonics.cpp</a>: It contains unordered maps for:
@@ -56,6 +60,12 @@ During the addition, we will check from which register we are performing the add
  <li>int_to_char:- It has decimal number as key & its hexadecimal equivalent as value.</li>
 </ol>
 
+- <a href="#">utility.cpp</a>: It contains utility functions for:
+<ol> 
+ <li>hex_to_dec:- It takes (string)hexadecmal number as input & return its decimal equivalent which is integer type.</li>
+ <li>dec_to_hex:- It takes  (integer)decimal number as input & return its hexadecimal equivalent which is string type.</li>
+ <li>dec_to_hex16:- It takes  (integer)decimal number as input & return its 16bit hexadecimal equivalent which is string type.</li>
+</ol>
 
 
 
