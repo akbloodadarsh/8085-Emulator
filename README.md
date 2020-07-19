@@ -3,6 +3,14 @@
   <img src="https://github.com/akbloodadarsh/None-of-your-concern/blob/master/8085-Emulator/8085_working.png">
 </p>
 
+#### How to use (For Linux)
+- 1. **git clone https://github.com/akbloodadarsh/8085-Emulator**
+- 2. **cd 8085-Emulator**
+- 3. **sudo apt install g++**
+- 4. **sudo apt install build-essential**
+- 5. **g++ main.cpp**
+
+
 ## Arithmetic
 - <a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/Arithmetic.cpp">Arithmetic.cpp</a>:This file contains all the arithmetic operations:
 
