@@ -92,7 +92,7 @@
  <li>dec_to_hex16:- It takes  (integer)decimal number as input & return its 16bit hexadecimal equivalent which is string type.</li>
 </ol>
 
-### Contribute
-
+### CONTRIBUTE
+Read the **<a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/contributing.md">contribution guidelines</a>** if you want to contribute.
 - any other suggestions then leave an issue.
 - Leave a star if you like the project :)
