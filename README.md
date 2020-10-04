@@ -47,7 +47,7 @@
 - <a href="#">JC</a>: Before calling this function we will check if carry is set or not, if yes then only we will call this function, rest is same as JMP.
 - <a href="#">JNC</a>: Before calling this function we will check if carry is set or not, if not then only we will call this function, rest is same as JMP
 - <a href="https://www.tutorialspoint.com/jump-if-zero-jz-result-in-8085-microprocessor">JZ</a>: Before calling this function we will check if Zero Flag is set or not, if yes then only we will call this function, rest is same as JMP.
-- <a href="https://www.tutorialspoint.com/jump-if-zero-jz-result-in-8085-microprocessor">JZ</a>: Before calling this function we will check if Zero Flag is set or not, if not then only we will call this function, rest is same as JMP.
+- <a href="https://www.tutorialspoint.com/jump-if-zero-jz-result-in-8085-microprocessor">JNZ</a>: Before calling this function we will check if Zero Flag is set or not, if not then only we will call this function, rest is same as JMP.
 
 ## LOAD AND STORE
 - <a href="https://github.com/akbloodadarsh/8085-Emulator/blob/master/Load_and_Store.cpp">Load_and_Store.cpp</a>: This file contains all the load and store operations:
